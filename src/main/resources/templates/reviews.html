@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Reviews</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+	<header>
+		<div th:if="${userDetails}">
+			<span th:text="${userDetails.username}"></span>
+			<a href="/logout">Logout</a>
+		</div>
+		<div th:unless="${user}">
+			<a href="/login">Login</a>
+		</div>
+	</header>
+
+	<div><a href="/success"><img src="/images/logo-siw.png" width="50%"/></a></div>
+	<h1 th:text="'Recensioni del film '+${movie.title}">Reviews</h1>
+	<div th:if="${reviews==null || reviews.isEmpty()}">Non ci sono recensioni per questo film</div>
+	<ul>
+		<li th:each="review : ${reviews}">
+			<a th:href="@{'/review' + '/' + ${review.id}}"
+				th:text="${review.title} + ' (' + ${review.vote} + ') '+${review.text}">Up! (2000)</a>
+		</li>
+	</ul>
+</body>
+
+</html>
